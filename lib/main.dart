@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
         // sets overall theme for the app
         colorScheme: ColorScheme.fromSeed(
           seedColor: const Color.fromRGBO(254, 206, 1, 1),
+          primary: const Color.fromRGBO(254, 206, 1, 1),
         ),
         inputDecorationTheme: const InputDecorationTheme(
           // sets hintText style for all hintTexts
