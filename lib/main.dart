@@ -13,11 +13,20 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Shopping App',
       theme: ThemeData(
-        // sets fontFamily for all texts in the project
+        // sets fontFamily for all texts
         fontFamily: 'Lato',
         // sets overall theme for the app
         colorScheme: ColorScheme.fromSeed(
           seedColor: const Color.fromRGBO(254, 206, 1, 1),
+        ),
+        inputDecorationTheme: const InputDecorationTheme(
+          // sets hintText style for all hintTexts
+          hintStyle: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+          ),
+          // sets icon color for all prefix icons
+          prefixIconColor: Color.fromRGBO(119, 119, 119, 1),
         ),
       ),
       home: const HomePage(),
