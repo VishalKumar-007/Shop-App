@@ -29,6 +29,19 @@ class MyApp extends StatelessWidget {
           // sets icon color for all prefix icons
           prefixIconColor: Color.fromRGBO(119, 119, 119, 1),
         ),
+        // set textStyles for the app
+        textTheme: const TextTheme(
+          // for product name text
+          titleMedium: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+          ),
+          // for product prices text
+          bodySmall: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+          ),
+        ),
       ),
       home: const HomePage(),
     );
