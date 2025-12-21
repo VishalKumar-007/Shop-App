@@ -39,14 +39,11 @@ class _HomePageState extends State<HomePage> {
             // header section (title & search bar)
             Row(
               children: [
-                const Padding(
-                  padding: EdgeInsets.all(20.0),
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
                   child: Text(
                     'Shoes\nCollection',
-                    style: TextStyle(
-                      fontSize: 35,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
                 ),
                 // Expanded widget tells flutter to take space how much available
