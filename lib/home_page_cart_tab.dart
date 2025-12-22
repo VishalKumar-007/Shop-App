@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app/global_variables.dart';
+import 'package:provider/provider.dart';
+import 'package:shop_app/cart_provider.dart';
 
 class HomePageCartTab extends StatelessWidget {
   const HomePageCartTab({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // getting product details from CartProvider
+    final cart = Provider.of<CartProvider>(context).cart;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Cart'),
