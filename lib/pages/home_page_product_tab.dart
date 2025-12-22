@@ -22,6 +22,10 @@ class _HomePageProductTabState extends State<HomePageProductTab> {
 
   @override
   Widget build(BuildContext context) {
+    // MediaQuery is used to make the app or website responsive
+    // as it gives many features like size of device, etc
+    // final screenSize = MediaQuery.sizeOf(context);
+
     final border = const OutlineInputBorder(
       borderSide: BorderSide(
         color: Color.fromRGBO(225, 225, 225, 1),
@@ -107,32 +111,83 @@ class _HomePageProductTabState extends State<HomePageProductTab> {
           ),
           // product cards section
           Expanded(
-            child: ListView.builder(
-              itemCount: products.length,
-              itemBuilder: (context, index) {
-                final product = products[index];
-                return GestureDetector(
-                  onTap: () {
-                    // Navigator is used to navigate from one screen to another
-                    // push helps in adding another screen to stack
-                    // pop helps in removing the top-most screen
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return ProductDetailsPage(product: product);
+            // Difference b/w LayoutBuilder & MediaQuery
+            // LayoutBuilder
+            // =====> can adapt to the parent widget's size and constraints
+            // MediaQuery
+            // =====> takes entire device size
+            // =====> doesn't care about constraints on the widgets
+
+            // LayoutBuilder is used to build a widget tree
+            // that can adapt to the parent widget's size and constraints
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                if (constraints.maxWidth > 1080) {
+                  // for websites & webApps
+                  return GridView.builder(
+                    itemCount: products.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio: 1.75,
+                        ),
+                    itemBuilder: (context, index) {
+                      final product = products[index];
+                      return GestureDetector(
+                        onTap: () {
+                          // Navigator is used to navigate from one screen to another
+                          // push helps in adding another screen to stack
+                          // pop helps in removing the top-most screen
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return ProductDetailsPage(product: product);
+                              },
+                            ),
+                          );
                         },
-                      ),
-                    );
-                  },
-                  child: ProductCard(
-                    title: product['title'] as String,
-                    price: product['price'] as double,
-                    image: product['imageUrl'] as String,
-                    backgroundColor: index.isEven
-                        ? const Color.fromRGBO(216, 240, 253, 1)
-                        : const Color.fromRGBO(245, 247, 249, 1),
-                  ),
-                );
+                        child: ProductCard(
+                          title: product['title'] as String,
+                          price: product['price'] as double,
+                          image: product['imageUrl'] as String,
+                          backgroundColor: index.isEven
+                              ? const Color.fromRGBO(216, 240, 253, 1)
+                              : const Color.fromRGBO(245, 247, 249, 1),
+                        ),
+                      );
+                    },
+                  );
+                } else {
+                  // for mobile screens
+                  return ListView.builder(
+                    itemCount: products.length,
+                    itemBuilder: (context, index) {
+                      final product = products[index];
+                      return GestureDetector(
+                        onTap: () {
+                          // Navigator is used to navigate from one screen to another
+                          // push helps in adding another screen to stack
+                          // pop helps in removing the top-most screen
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return ProductDetailsPage(product: product);
+                              },
+                            ),
+                          );
+                        },
+                        child: ProductCard(
+                          title: product['title'] as String,
+                          price: product['price'] as double,
+                          image: product['imageUrl'] as String,
+                          backgroundColor: index.isEven
+                              ? const Color.fromRGBO(216, 240, 253, 1)
+                              : const Color.fromRGBO(245, 247, 249, 1),
+                        ),
+                      );
+                    },
+                  );
+                }
               },
             ),
           ),

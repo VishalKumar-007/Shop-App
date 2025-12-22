@@ -71,7 +71,10 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
           const Spacer(),
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Image.asset(widget.product['imageUrl'] as String),
+            child: Image.asset(
+              widget.product['imageUrl'] as String,
+              height: 250,
+            ),
           ),
           // will give double space as compared to previous spacer widget
           const Spacer(flex: 2),
@@ -126,7 +129,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                     onPressed: onTap,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Theme.of(context).colorScheme.primary,
-                      minimumSize: const Size(double.infinity, 50),
+                      fixedSize: const Size(350, 50),
                     ),
                     icon: const Icon(
                       Icons.shopping_cart_outlined,
