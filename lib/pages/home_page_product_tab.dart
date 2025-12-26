@@ -11,13 +11,21 @@ class HomePageProductTab extends StatefulWidget {
 }
 
 class _HomePageProductTabState extends State<HomePageProductTab> {
-  final List<String> filters = const ['All', 'Adidas', 'Nike', 'Bata'];
+  final List<String> filters = const [
+    'All',
+    'Adidas',
+    'Nike',
+    'Bata',
+    'Jordan',
+  ];
   late String selectedFilter;
+  late List<Map<String, Object>> filteredProducts;
 
   @override
   void initState() {
     super.initState();
     selectedFilter = filters[0];
+    filteredProducts = products;
   }
 
   @override
@@ -80,7 +88,19 @@ class _HomePageProductTabState extends State<HomePageProductTab> {
                   child: GestureDetector(
                     onTap: () {
                       setState(() {
+                        // filters functionality
                         selectedFilter = filter;
+                        if (filter == 'All') {
+                          filteredProducts = products;
+                        } else {
+                          filteredProducts = products
+                              .where(
+                                (product) => product['title']
+                                    .toString()
+                                    .contains(filter),
+                              )
+                              .toList();
+                        }
                       });
                     },
                     // chip widget provides a compact element holding an icon and text
@@ -125,14 +145,14 @@ class _HomePageProductTabState extends State<HomePageProductTab> {
                 if (constraints.maxWidth > 1080) {
                   // for websites & webApps
                   return GridView.builder(
-                    itemCount: products.length,
+                    itemCount: filteredProducts.length,
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           childAspectRatio: 1.75,
                         ),
                     itemBuilder: (context, index) {
-                      final product = products[index];
+                      final product = filteredProducts[index];
                       return GestureDetector(
                         onTap: () {
                           // Navigator is used to navigate from one screen to another
@@ -160,9 +180,9 @@ class _HomePageProductTabState extends State<HomePageProductTab> {
                 } else {
                   // for mobile screens
                   return ListView.builder(
-                    itemCount: products.length,
+                    itemCount: filteredProducts.length,
                     itemBuilder: (context, index) {
-                      final product = products[index];
+                      final product = filteredProducts[index];
                       return GestureDetector(
                         onTap: () {
                           // Navigator is used to navigate from one screen to another

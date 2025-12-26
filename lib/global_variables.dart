@@ -9,7 +9,7 @@ final products = [
   },
   {
     'id': '1',
-    'title': 'Addidas Shoes',
+    'title': 'Adidas Shoes',
     'price': 20.12,
     'imageUrl': 'assets/images/shoes_2.png',
     'company': 'Addidas',
