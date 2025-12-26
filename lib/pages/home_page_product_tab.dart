@@ -20,6 +20,7 @@ class _HomePageProductTabState extends State<HomePageProductTab> {
   ];
   late String selectedFilter;
   late List<Map<String, Object>> filteredProducts;
+  TextEditingController textEditingController = TextEditingController();
 
   @override
   void initState() {
@@ -62,6 +63,28 @@ class _HomePageProductTabState extends State<HomePageProductTab> {
               // useful for widget which always take full width (e.g. TextField)
               Expanded(
                 child: TextField(
+                  controller: textEditingController,
+                  // search functionality
+                  onChanged: (value) => setState(() {
+                    filteredProducts = products
+                        .where(
+                          (product) => product['title']
+                              .toString()
+                              .toLowerCase()
+                              .contains(value.toLowerCase()),
+                        )
+                        .toList();
+                  }),
+                  onSubmitted: (value) => setState(() {
+                    filteredProducts = products
+                        .where(
+                          (product) => product['title']
+                              .toString()
+                              .toLowerCase()
+                              .contains(value.toLowerCase()),
+                        )
+                        .toList();
+                  }),
                   decoration: InputDecoration(
                     hintText: 'Search',
                     prefixIcon: const Icon(Icons.search),
